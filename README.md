@@ -5,7 +5,7 @@ The website uses [OpenWeather Map API](https://openweathermap.org/api) for the d
 
 ## Tech used
 
-ReactJS, HTML/CSS
+React JS, HTML/CSS
 
 ## Live
 
