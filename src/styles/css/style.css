@@ -88,7 +88,7 @@ form input {
 }
 
 form input:focus {
-  outline: 1px solid #f0f5f9;
+  outline: 1px solid #bb5104;
   border-bottom: 0;
   border-radius: 10px;
 }
@@ -144,8 +144,8 @@ img {
   background: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)), url("../../images/card-bg.jpg") no-repeat center center/cover;
   min-width: 25%;
   place-self: start;
-  -webkit-animation: fade-in 0.5s ease-in-out forwards;
-          animation: fade-in 0.5s ease-in-out forwards;
+  -webkit-animation: fade-in 1s ease-in-out forwards;
+          animation: fade-in 1s ease-in-out forwards;
   -webkit-transition: opacity 0.25s ease-in-out;
   transition: opacity 0.25s ease-in-out;
 }
@@ -189,9 +189,9 @@ img {
 .city-card .city-card__temps::after {
   content: "";
   display: block;
-  width: 70%;
+  max-width: 100%;
   height: 1px;
-  background: #8a7d58;
+  background: #5b533a;
 }
 
 .city-card .city-card__description {
@@ -246,7 +246,7 @@ img {
       -ms-flex-positive: 1;
           flex-grow: 1;
   min-width: 70%;
-  place-self: center center;
+  place-self: center;
 }
 
 @media (max-width: 790px) {
@@ -289,15 +289,14 @@ img {
 .details-cards__card header::after {
   content: "";
   display: block;
-  width: 70%;
+  max-width: 100%;
   height: 1px;
-  background: #8a7d58;
+  background: #5b533a;
 }
 
 .details-cards__card header span {
-  color: inherit;
-  font-size: 14px;
-  color: #d45c05;
+  color: #893b03;
+  font-size: 16px;
 }
 
 .details-cards__card .details-cards__card-temps {
@@ -313,9 +312,9 @@ img {
 .details-cards__card .details-cards__card-temps::after {
   content: "";
   display: block;
-  width: 70%;
+  max-width: 100%;
   height: 1px;
-  background: #8a7d58;
+  background: #5b533a;
 }
 
 .details-cards__card .details-cards__card-wind-humidity {
@@ -331,9 +330,9 @@ img {
 .details-cards__card .details-cards__card-wind-humidity::after {
   content: "";
   display: block;
-  width: 70%;
+  max-width: 100%;
   height: 1px;
-  background: #8a7d58;
+  background: #5b533a;
 }
 
 .details-cards__card .details-cards__card-description {
@@ -348,6 +347,14 @@ img {
 
 .details-cards__card .details-cards__card-description p::first-letter {
   text-transform: uppercase;
+}
+
+.error {
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  color: #ddd;
+  font-family: "Fjalla One", sans-serif;
+  font-weight: 400;
 }
 
 footer {

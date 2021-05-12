@@ -10,23 +10,24 @@ const Result = ({
 }) => {
   return (
     <main>
-      {showError ? <h2>No city found</h2> : ""}
-      {
-        loading && !showError
-          ? searchData.map((data, index) => {
-              return (
-                <CityCard
-                  data={data}
-                  detailedForecast={detailedForecast}
-                  getDetailedForecast={getDetailedForecast}
-                  key={index}
-                  showDetails={showDetails}
-                />
-              );
-            })
-          : ""
-        // <p>Search for a city</p>
-      }
+      {showError ? (
+        <h2 className="error">No city found, try another query!</h2>
+      ) : (
+        ""
+      )}
+      {loading && !showError
+        ? searchData.map((data, index) => {
+            return (
+              <CityCard
+                data={data}
+                detailedForecast={detailedForecast}
+                getDetailedForecast={getDetailedForecast}
+                key={index}
+                showDetails={showDetails}
+              />
+            );
+          })
+        : ""}
     </main>
   );
 };

@@ -33,7 +33,6 @@ function App() {
     }
     const result = await call.json();
     setShowError(false);
-    console.log([result]);
     setSearchData([result]);
     setIsLoading(true);
     setShowDetails(false);
@@ -49,7 +48,6 @@ function App() {
     const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordsValue.latitude}&lon=${coordsValue.longitude}&units=metric&appid=${apiKey}`;
     const call = await fetch(api);
     const result = await call.json();
-    console.log([result]);
     setDetailedForecast([result]);
     setShowDetails(true);
     return [result];
@@ -65,7 +63,6 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        console.log(position.coords.latitude + " " + position.coords.longitude);
         const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
         const call = await fetch(api);
         const result = await call.json();

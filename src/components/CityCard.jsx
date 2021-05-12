@@ -10,7 +10,6 @@ const CityCard = ({
     name,
     sys: { country },
     main: { temp, feels_like, temp_min, temp_max },
-    // weather: { description, icon },
     weather,
   } = data;
 
