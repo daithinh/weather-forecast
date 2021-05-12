@@ -93,8 +93,14 @@ function App() {
       />
 
       {detailedForecast && showInitial
-        ? detailedForecast.map((details) => {
-            return <DetailedCard details={details} searchData={searchData} />;
+        ? detailedForecast.map((details, index) => {
+            return (
+              <DetailedCard
+                key={index}
+                details={details}
+                searchData={searchData}
+              />
+            );
           })
         : ""}
 

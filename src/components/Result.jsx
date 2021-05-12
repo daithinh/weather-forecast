@@ -13,13 +13,13 @@ const Result = ({
       {showError ? <h2>No city found</h2> : ""}
       {
         loading && !showError
-          ? searchData.map((data) => {
+          ? searchData.map((data, index) => {
               return (
                 <CityCard
                   data={data}
                   detailedForecast={detailedForecast}
                   getDetailedForecast={getDetailedForecast}
-                  key={data.id}
+                  key={index}
                   showDetails={showDetails}
                 />
               );

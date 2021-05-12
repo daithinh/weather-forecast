@@ -40,7 +40,7 @@ const CityCard = ({
               <>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
-                  alt="weather icon"
+                  alt="current weather"
                 />
                 <p>{description}</p>
               </>

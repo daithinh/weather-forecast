@@ -8,7 +8,7 @@ const Input = ({ handleSearch, query, setQuery }) => {
         onChange={(e) => {
           setQuery(e.target.value);
         }}
-        placeholder="Search..."
+        placeholder="Search city by name..."
         value={query}
       />
       <button>

@@ -1,0 +1,25 @@
+@import "variables";
+
+@mixin header-font-query {
+  font-size: $largeHeaderFontSize;
+
+  @media (max-width: 790px) {
+    font-size: $defaultFontSize;
+  }
+}
+
+@mixin content-font-query {
+  font-size: $defaultFontSize;
+
+  @media (max-width: 790px) {
+    font-size: $defaultMobileFontSize;
+  }
+}
+
+@mixin article-border-bottom-custom {
+  content: "";
+  display: block;
+  width: 70%;
+  height: 1px;
+  background: $clay;
+}
