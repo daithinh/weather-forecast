@@ -9,4 +9,6 @@ ReactJS, HTML/CSS
 
 ## Live
 
-Coming soon
+https://get-weather-forecast.netlify.app/
+
+Thank you for reading.
