@@ -55,7 +55,7 @@ form {
     outline: none;
     border: none;
     border-bottom: 1px solid $mainWhite;
-    padding: 1em 0.5em;
+    padding: 0.5em 0.25em;
     font-size: $defaultFontSize;
     color: $mainTxtColor;
     font-family: inherit;
@@ -65,6 +65,10 @@ form {
       border-bottom: 0;
       border-radius: 10px;
     }
+
+    @media (max-width: 790px) {
+      font-size: $defaultMobileFontSize;
+    }
   }
 
   button {
@@ -73,7 +77,7 @@ form {
     background: none;
     color: $mainWhite;
     font-size: $defaultFontSize;
-    padding: 1em 0.5em;
+    padding: 0.5em 0.25em;
     cursor: pointer;
   }
 }
@@ -95,7 +99,6 @@ img {
 }
 
 .city-card {
-  background: lighten($lightTangerine, 5%);
   color: $mainTxtColor;
   padding: 0.5em;
   display: flex;
@@ -115,7 +118,7 @@ img {
   }
 
   span {
-    color: $lightTangerine;
+    color: lighten($lightTangerine, 5%);
   }
 
   header {
@@ -128,9 +131,6 @@ img {
   .city-card__temps {
     @include content-font-query();
     padding: 0.5em 0;
-    &::after {
-      @include article-border-bottom-custom();
-    }
   }
 
   .city-card__description {
@@ -152,9 +152,8 @@ img {
     border: none;
     outline: none;
     background: transparent;
-    outline: 5px double lighten($lightTangerine, 5%);
-    outline-offset: -4px;
-    border-radius: 10px;
+    outline: 3px double lighten($lightTangerine, 5%);
+    outline-offset: -3px;
     cursor: pointer;
     font-size: inherit;
     color: $mainTxtColor;
@@ -182,11 +181,9 @@ img {
 .details-cards__card {
   padding: 0.5em;
   color: $secondaryTxtColor;
-  background: $mainWhite;
-  background: darken($lightTangerine, 5%);
-  background: lightgrey;
+  background: #f0f5f9;
   border-radius: 10px;
-  box-shadow: 2.5px 2.5px 5px 2.5px #000;
+  box-shadow: 3px 3px 20px -2.5px #000000;
   animation: fade-in 0.5s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
 
@@ -214,9 +211,6 @@ img {
 
   .details-cards__card-temps {
     @include content-font-query();
-    &::after {
-      @include article-border-bottom-custom();
-    }
   }
 
   .details-cards__card-wind-humidity {
