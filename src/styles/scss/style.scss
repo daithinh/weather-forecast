@@ -1,7 +1,7 @@
 @import "variables";
 @import "mixins";
 @import "keyframes";
-@import url("https://fonts.googleapis.com/css2?family=Fjalla+One&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -30,9 +30,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    filter: blur(15px);
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-      url("../../images/app-bg.jpg") no-repeat center center/cover;
+    background: #141414;
   }
 }
 
@@ -61,9 +59,14 @@ form {
     font-family: inherit;
     transition: all 0.25s ease-in-out;
     &:focus {
-      outline: 1px solid $darkTangerine;
+      outline: 1px solid $mainWhite;
       border-bottom: 0;
       border-radius: 10px;
+    }
+
+    &::placeholder {
+      opacity: 1;
+      color: $mainWhite;
     }
 
     @media (max-width: 790px) {
@@ -107,9 +110,9 @@ img {
   border-radius: 10px;
   box-shadow: 2.5px 2.5px 15px 2.5px #000;
   margin: 0.5em;
-  background: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
-    url("../../images/card-bg.jpg") no-repeat center center/cover;
-  min-width: 25%;
+  background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+    url("../../images/warm.png") no-repeat center center/cover;
+  min-width: 20vw;
   place-self: start;
   animation: fade-in 1s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
@@ -118,25 +121,37 @@ img {
   }
 
   span {
-    color: lighten($lightTangerine, 5%);
+    font-weight: 600;
+    text-shadow: 2px 2px 5px #000;
   }
 
   header {
-    font-family: "Fjalla One", sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.025em;
     @include header-font-query();
+    text-shadow: 2px 2px 5px #000;
+  }
+
+  .city-card__temps-main {
+    font-size: $largeHeaderFontSize;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px #000;
   }
 
   .city-card__temps {
     @include content-font-query();
     padding: 0.5em 0;
+    text-shadow: 2px 2px 5px #000;
   }
 
   .city-card__description {
     padding: 0.5em 0;
     p {
       @include content-font-query();
+      text-shadow: 2px 2px 5px #000;
       &::first-letter {
         text-transform: uppercase;
       }
@@ -152,7 +167,7 @@ img {
     border: none;
     outline: none;
     background: transparent;
-    outline: 3px double lighten($lightTangerine, 5%);
+    outline: 3px double lighten($lightTangerine, 15%);
     outline-offset: -3px;
     cursor: pointer;
     font-size: inherit;
@@ -162,6 +177,11 @@ img {
       outline-offset: 0;
     }
   }
+}
+
+.cold {
+  background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+    url("../../images/cold.png") no-repeat center center/cover;
 }
 
 .details-cards__cont {
@@ -193,7 +213,7 @@ img {
   }
 
   span {
-    color: $darkTangerine;
+    color: darken($darkTangerine, 10%);
   }
 
   header {
@@ -234,7 +254,7 @@ img {
   text-transform: uppercase;
   letter-spacing: 0.025em;
   color: $mainTxtColor;
-  font-family: "Fjalla One", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
 }
 
@@ -250,7 +270,6 @@ footer {
       font-weight: 400;
       color: #ddd;
       text-align: center;
-      font-family: "Raleway", sans-serif;
       text-decoration: none;
       font-size: $defaultFontSize;
       padding: 0.5em;

@@ -8,6 +8,14 @@
   }
 }
 
+@mixin main-temp-font-query {
+  font-size: $headerFontSize;
+
+  @media (max-width: 790px) {
+    font-size: $defaultFontSize;
+  }
+}
+
 @mixin content-font-query {
   font-size: $defaultFontSize;
 
