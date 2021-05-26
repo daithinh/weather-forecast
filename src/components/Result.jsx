@@ -10,10 +10,8 @@ const Result = ({
 }) => {
   return (
     <main>
-      {showError ? (
+      {showError && (
         <h2 className="error">No city found, try another query!</h2>
-      ) : (
-        ""
       )}
       {loading && !showError
         ? searchData.map((data, index) => {

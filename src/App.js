@@ -4,6 +4,7 @@ import Input from "./components/Input";
 import Results from "./components/Result";
 import DetailedCard from "./components/DetailedCard";
 import Footer from "./components/Footer";
+import Header from "./components/Header";
 
 function App() {
   // do not steal please, i too suffering
@@ -79,7 +80,10 @@ function App() {
 
   return (
     <div className="App">
-      <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
+      <div className="app-header">
+        <Header />
+        <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
+      </div>
       <Results
         searchData={searchData}
         loading={loading}

@@ -10,16 +10,14 @@
 }
 
 html {
-  line-height: 1.6;
   height: 100%;
+  line-height: 1.6;
   scroll-behavior: smooth;
-  background: $darkGrey;
   font-family: "Roboto", sans-serif;
-  background: $darkGrey;
 }
 
 body {
-  min-height: 100%;
+  min-height: 100vh;
   position: relative;
 
   &::before {
@@ -30,6 +28,8 @@ body {
     height: 100%;
     top: 0;
     left: 0;
+    right: 0;
+    bottom: 0;
     background: #141414;
   }
 }
@@ -40,33 +40,35 @@ main {
   flex-flow: row wrap;
   place-items: flex-start;
   justify-content: space-evenly;
-  padding: 0.5em;
+  height: auto;
+  gap: 2em;
 }
 
 form {
-  min-height: 100px;
-  place-self: start center;
-  padding: 0.5em 1em;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  place-items: center;
+  gap: 1em;
+
   input {
-    max-width: calc(100vw / 1.5);
     background: transparent;
+    padding: 0.5em 0.25em;
     outline: none;
     border: none;
-    border-bottom: 1px solid $mainWhite;
-    padding: 0.5em 0.25em;
+    box-shadow: 0px 2px 2px -2px $mainTxtColor;
     font-size: $defaultFontSize;
     color: $mainTxtColor;
     font-family: inherit;
-    transition: all 0.25s ease-in-out;
+    transition: box-shadow 0.25s ease-in-out;
+
     &:focus {
-      outline: 1px solid $mainWhite;
-      border-bottom: 0;
-      border-radius: 10px;
+      box-shadow: 0px 3px 1px -1px $darkTangerine;
     }
 
     &::placeholder {
       opacity: 1;
-      color: $mainWhite;
+      color: $mainTxtColor;
     }
 
     @media (max-width: 790px) {
@@ -78,9 +80,10 @@ form {
     border: none;
     outline: none;
     background: none;
-    color: $mainWhite;
+    color: $mainTxtColor;
     font-size: $defaultFontSize;
-    padding: 0.5em 0.25em;
+    padding: 0.5em;
+    display: inline-block;
     cursor: pointer;
   }
 }
@@ -89,7 +92,7 @@ form {
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   min-height: 100vh;
-  place-items: center;
+  place-items: start center;
 }
 
 img {
@@ -101,6 +104,23 @@ img {
   border-radius: 50%;
 }
 
+.app-header {
+  place-self: start center;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 2em;
+  place-content: center;
+  text-transform: uppercase;
+  padding: 0.5em;
+  h2 {
+    color: $mainTxtColor;
+    color: $mainTxtColor;
+    @include header-font-query();
+    font-family: "Montserrat", sans-serif;
+  }
+}
+
 .city-card {
   color: $mainTxtColor;
   padding: 0.5em;
@@ -109,14 +129,14 @@ img {
   justify-content: space-between;
   border-radius: 10px;
   box-shadow: 2.5px 2.5px 15px 2.5px #000;
-  margin: 0.5em;
+
   background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
     url("../../images/warm.png") no-repeat center center/cover;
   min-width: 20vw;
   place-self: start;
   animation: fade-in 1s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
-  @media (max-width: 1275px) {
+  @media (max-width: 1300px) {
     flex-grow: 1;
   }
 
@@ -134,14 +154,14 @@ img {
     text-shadow: 2px 2px 5px #000;
   }
 
-  .city-card__temps-main {
+  .city-card__main {
     font-size: $largeHeaderFontSize;
     font-family: "Montserrat", sans-serif;
     font-weight: 600;
     text-shadow: 2px 2px 5px #000;
   }
 
-  .city-card__temps {
+  .city-card__additional {
     @include content-font-query();
     padding: 0.5em 0;
     text-shadow: 2px 2px 5px #000;
@@ -167,14 +187,15 @@ img {
     border: none;
     outline: none;
     background: transparent;
-    outline: 3px double lighten($lightTangerine, 15%);
-    outline-offset: -3px;
+    border-radius: 10px;
     cursor: pointer;
     font-size: inherit;
     color: $mainTxtColor;
     transition: all 0.25s ease-in-out;
+    background: #010101;
     &:hover {
-      outline-offset: 0;
+      background: #141414;
+      color: $mainTxtColor;
     }
   }
 }
@@ -184,11 +205,10 @@ img {
     url("../../images/cold.png") no-repeat center center/cover;
 }
 
-.details-cards__cont {
+.details-cards-cont {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1em;
-  margin: 0.5em;
   flex-grow: 1;
   min-width: 70%;
   place-self: center;
@@ -201,7 +221,7 @@ img {
 .details-cards__card {
   padding: 0.5em;
   color: $secondaryTxtColor;
-  background: #f0f5f9;
+  background: #ddd;
   border-radius: 10px;
   box-shadow: 3px 3px 20px -2.5px #000000;
   animation: fade-in 0.5s ease-in-out forwards;
@@ -229,18 +249,18 @@ img {
     }
   }
 
-  .details-cards__card-temps {
+  .details-cards__card--temps {
     @include content-font-query();
   }
 
-  .details-cards__card-wind-humidity {
+  .details-cards__card--wind {
     @include content-font-query();
     &::after {
       @include article-border-bottom-custom();
     }
   }
 
-  .details-cards__card-description {
+  .details-cards__card--description {
     @include content-font-query();
     p {
       &::first-letter {
@@ -256,6 +276,7 @@ img {
   color: $mainTxtColor;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
+  text-align: center;
 }
 
 footer {

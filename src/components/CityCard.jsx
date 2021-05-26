@@ -25,10 +25,10 @@ const CityCard = ({
             {name} ({country})
           </p>
         </header>
-        <div className="city-card__temps-main">
+        <div className="city-card__main">
           <p>{temp} &#8451;</p>
         </div>
-        <div className="city-card__temps">
+        <div className="city-card__additional">
           <p>
             <span>Real feel:</span> {feels_like} &#8451;
           </p>

@@ -2,7 +2,7 @@ import React from "react";
 
 const DetailedCard = ({ details }) => {
   return (
-    <div className="details-cards__cont">
+    <div className="details-cards-cont">
       {details.daily.map((days, dayOfWeek) => {
         const {
           temp: { day, eve, min, max },
@@ -15,14 +15,14 @@ const DetailedCard = ({ details }) => {
         const today = newDay.getDate();
         newDay.setDate(today + dayOfWeek);
         return (
-          <div className="details-cards__card" key={dayOfWeek}>
+          <article className="details-cards__card" key={dayOfWeek}>
             <header>
               <p>
                 {newDay.toLocaleString("en-us", { weekday: "long" })}{" "}
                 <span>({newDay.toLocaleDateString()})</span>
               </p>
             </header>
-            <div className="details-cards__card-temps">
+            <div className="details-cards__card--temps">
               <p>
                 <span>Min:</span> {min}&#8451; / <span>Max:</span> {max}&#8451;
               </p>
@@ -34,7 +34,7 @@ const DetailedCard = ({ details }) => {
               </p>
             </div>
 
-            <div className="details-cards__card-wind-humidity">
+            <div className="details-cards__card--wind">
               <p>
                 <span>Wind speed:</span> {wind_speed}
               </p>
@@ -48,7 +48,7 @@ const DetailedCard = ({ details }) => {
 
             {weather.map(({ description, icon }) => {
               return (
-                <div className="details-cards__card-description">
+                <div className="details-cards__card--description">
                   <p>{description}</p>
                   <img
                     src={`http://openweathermap.org/img/wn/${icon}.png`}
@@ -57,7 +57,7 @@ const DetailedCard = ({ details }) => {
                 </div>
               );
             })}
-          </div>
+          </article>
         );
       })}
     </div>
