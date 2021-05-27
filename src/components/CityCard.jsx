@@ -11,15 +11,11 @@ const CityCard = ({
     sys: { country },
     main: { temp, feels_like, temp_min, temp_max },
     weather,
-    id,
   } = data;
-  let defaultClass = `city-card`;
+
   return (
     <>
-      <article
-        className={temp >= 18 ? defaultClass : `${defaultClass} cold`}
-        key={id}
-      >
+      <article className={temp >= 18 ? `city-card` : `city-card cold`}>
         <header className="city-card__header">
           <p>
             {name} ({country})
@@ -57,8 +53,8 @@ const CityCard = ({
       </article>
 
       {detailedForecast && showDetails
-        ? detailedForecast.map((details, index) => {
-            return <DetailedCard details={details} key={index} />;
+        ? detailedForecast.map((details) => {
+            return <DetailedCard details={details} />;
           })
         : ""}
     </>

@@ -2,20 +2,20 @@ import "./styles/css/style.css";
 import { useState, useEffect } from "react";
 import Input from "./components/Input";
 import Results from "./components/Result";
-import DetailedCard from "./components/DetailedCard";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import CityCard from "./components/CityCard";
 
 function App() {
   // do not steal please, i too suffering
   const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
   // do not steal please, i too suffering
   const [showDetails, setShowDetails] = useState(false);
-  const [loading, setIsLoading] = useState(false);
   const [showError, setShowError] = useState(false);
   const [showInitial, setShowInitial] = useState(false);
   const [searchData, setSearchData] = useState([]);
   const [detailedForecast, setDetailedForecast] = useState([]);
+  const [initialForecast, setInitialForecast] = useState([]);
   const [query, setQuery] = useState("");
   const [coordsValue, setCoordsValue] = useState({
     latitude: "",
@@ -35,7 +35,7 @@ function App() {
     const result = await call.json();
     setShowError(false);
     setSearchData([result]);
-    setIsLoading(true);
+
     setShowDetails(false);
     setShowInitial(false);
     setCoordsValue({
@@ -64,18 +64,21 @@ function App() {
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
-        const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
+        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
         const call = await fetch(api);
         const result = await call.json();
-        console.log([result]);
-        setDetailedForecast([result]);
+        setCoordsValue({
+          latitude: result.coord.lat,
+          longitude: result.coord.lon,
+        });
+
+        setInitialForecast([result]);
         setShowInitial(true);
         return [result];
       });
-    } else {
-      setShowError(true);
-      return;
     }
+
+    return;
   }, [apiKey]);
 
   return (
@@ -84,27 +87,28 @@ function App() {
         <Header />
         <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
       </div>
-      <Results
-        searchData={searchData}
-        loading={loading}
-        showError={showError}
-        detailedForecast={detailedForecast}
-        getDetailedForecast={getDetailedForecast}
-        showDetails={showDetails}
-      />
+      <main>
+        <Results
+          searchData={searchData}
+          showError={showError}
+          detailedForecast={detailedForecast}
+          getDetailedForecast={getDetailedForecast}
+          showDetails={showDetails}
+        />
 
-      {detailedForecast && showInitial
-        ? detailedForecast.map((details, index) => {
+        {showInitial &&
+          initialForecast.map((data, index) => {
             return (
-              <DetailedCard
+              <CityCard
+                data={data}
+                showDetails={showDetails}
+                detailedForecast={detailedForecast}
+                getDetailedForecast={getDetailedForecast}
                 key={index}
-                details={details}
-                searchData={searchData}
               />
             );
-          })
-        : ""}
-
+          })}
+      </main>
       <Footer />
     </div>
   );

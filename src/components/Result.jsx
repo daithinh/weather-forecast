@@ -1,7 +1,6 @@
 import CityCard from "./CityCard";
 
 const Result = ({
-  loading,
   searchData,
   showError,
   detailedForecast,
@@ -9,24 +8,23 @@ const Result = ({
   showDetails,
 }) => {
   return (
-    <main>
-      {showError && (
+    <>
+      {!showError ? (
+        searchData.map((data, index) => {
+          return (
+            <CityCard
+              data={data}
+              detailedForecast={detailedForecast}
+              getDetailedForecast={getDetailedForecast}
+              showDetails={showDetails}
+              key={index}
+            />
+          );
+        })
+      ) : (
         <h2 className="error">No city found, try another query!</h2>
       )}
-      {loading && !showError
-        ? searchData.map((data, index) => {
-            return (
-              <CityCard
-                data={data}
-                detailedForecast={detailedForecast}
-                getDetailedForecast={getDetailedForecast}
-                key={index}
-                showDetails={showDetails}
-              />
-            );
-          })
-        : ""}
-    </main>
+    </>
   );
 };
 
