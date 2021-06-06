@@ -133,6 +133,7 @@ img {
   background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
     url("../../images/warm.png") no-repeat center center/cover;
   min-width: 20vw;
+
   place-self: start;
   animation: fade-in 1s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
@@ -152,6 +153,7 @@ img {
     letter-spacing: 0.025em;
     @include header-font-query();
     text-shadow: 2px 2px 5px #000;
+    max-width: 10ch;
   }
 
   .city-card__main {
@@ -226,7 +228,6 @@ img {
   box-shadow: 3px 3px 20px -2.5px #000000;
   animation: fade-in 0.5s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
-
   @media (max-width: 790px) {
     width: 100%;
     margin: 0 auto;
