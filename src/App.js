@@ -1,26 +1,27 @@
 import "./styles/css/style.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Input from "./components/Input";
 import Results from "./components/Result";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/presentational/Footer";
+import Header from "./components/presentational/Header";
 import CityCard from "./components/CityCard";
+import key from "weak-key";
+import { useInitialForecast } from "./APIcalls/useInitialForecast";
 
 function App() {
-  // do not steal please, i too suffering
   const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
-  // do not steal please, i too suffering
-  const [showDetails, setShowDetails] = useState(false);
-  const [showError, setShowError] = useState(false);
-  const [showInitial, setShowInitial] = useState(false);
-  const [searchData, setSearchData] = useState([]);
-  const [detailedForecast, setDetailedForecast] = useState([]);
-  const [initialForecast, setInitialForecast] = useState([]);
-  const [query, setQuery] = useState("");
-  const [coordsValue, setCoordsValue] = useState({
-    latitude: "",
-    longitude: "",
-  });
+  const [showDetails, setShowDetails] = useState(Boolean);
+  const [showError, setShowError] = useState(Boolean);
+  const [searchData, setSearchData] = useState(Array);
+  const [detailedForecast, setDetailedForecast] = useState(Array);
+  const {
+    initialForecast,
+    coordsValue,
+    setCoordsValue,
+    setShowInitial,
+    showInitial,
+  } = useInitialForecast();
+  const [query, setQuery] = useState(String);
 
   const getCityForecast = async (query) => {
     const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${apiKey}`;
@@ -61,26 +62,6 @@ function App() {
     });
   };
 
-  useEffect(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async (position) => {
-        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
-        const call = await fetch(api);
-        const result = await call.json();
-        setCoordsValue({
-          latitude: result.coord.lat,
-          longitude: result.coord.lon,
-        });
-
-        setInitialForecast([result]);
-        setShowInitial(true);
-        return [result];
-      });
-    }
-
-    return;
-  }, [apiKey]);
-
   return (
     <div className="App">
       <div className="app-header">
@@ -97,14 +78,16 @@ function App() {
         />
 
         {showInitial &&
-          initialForecast.map((data, index) => {
+          initialForecast.map((data) => {
+            console.log(data);
+
             return (
               <CityCard
                 data={data}
                 showDetails={showDetails}
                 detailedForecast={detailedForecast}
                 getDetailedForecast={getDetailedForecast}
-                key={index}
+                key={key(data)}
               />
             );
           })}

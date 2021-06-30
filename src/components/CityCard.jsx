@@ -1,5 +1,5 @@
 import DetailedCard from "./DetailedCard";
-
+import key from "weak-key";
 const CityCard = ({
   data,
   detailedForecast,
@@ -54,7 +54,7 @@ const CityCard = ({
 
       {detailedForecast && showDetails
         ? detailedForecast.map((details) => {
-            return <DetailedCard details={details} />;
+            return <DetailedCard details={details} key={key(details)} />;
           })
         : ""}
     </>
