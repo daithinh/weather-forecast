@@ -10,10 +10,6 @@ import Main from "./components/Main";
 const App = () => {
   const [showError, setShowError] = useState(Boolean);
   const [searchData, setSearchData] = useState(Array);
-  // const [coordsValue, setCoordsValue] = useState({
-  //   latitude: String,
-  //   longitude: String,
-  // });
   const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
   const {
     initialForecast,
@@ -23,17 +19,8 @@ const App = () => {
     setIsLoading,
     detailedForecast,
     setDetailedForecast,
-    // getDetailedForecast,
   } = useInitialForecast();
   const [query, setQuery] = useState(String);
-
-  // const getDetailedForecast = async () => {
-  //   const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordsValue.latitude}&lon=${coordsValue.longitude}&units=metric&appid=${apiKey}`;
-  //   const call = await fetch(api);
-  //   const result = await call.json();
-  //   setDetailedForecast([result]);
-  //   return [result];
-  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
