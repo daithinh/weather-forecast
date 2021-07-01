@@ -16,6 +16,28 @@
   }
 }
 
+@-webkit-keyframes loading {
+  0% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
+@keyframes loading {
+  0% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -33,18 +55,6 @@ html {
 body {
   min-height: 100vh;
   position: relative;
-}
-
-body::before {
-  content: "";
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   background: #141414;
 }
 
@@ -61,8 +71,8 @@ main {
   -webkit-box-pack: space-evenly;
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
-  height: auto;
   gap: 2em;
+  min-height: 25em;
 }
 
 form {
@@ -142,6 +152,7 @@ form button {
       grid-template-columns: repeat(1, 1fr);
   min-height: 100vh;
   place-items: start center;
+  gap: 2em;
 }
 
 img {
@@ -150,8 +161,19 @@ img {
   -o-object-fit: cover;
      object-fit: cover;
   display: block;
-  background: #85827f;
+  background: #c3c2c1;
   border-radius: 50%;
+}
+
+.loading {
+  width: 8em;
+  height: 8em;
+  background: transparent;
+  border: 0.25em solid #e6ae35;
+  border-right: 0.25em solid #bb5104;
+  border-radius: 50%;
+  -webkit-animation: loading 1.5s linear infinite;
+          animation: loading 1.5s linear infinite;
 }
 
 .app-header {

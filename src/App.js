@@ -1,100 +1,85 @@
 import "./styles/css/style.css";
 import { useState } from "react";
 import Input from "./components/Input";
-import Results from "./components/Result";
 import Footer from "./components/presentational/Footer";
 import Header from "./components/presentational/Header";
-import CityCard from "./components/CityCard";
-import key from "weak-key";
 import { useInitialForecast } from "./APIcalls/useInitialForecast";
+import { getCityForecast } from "./APIcalls/getCityForecast";
 
-function App() {
-  const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
-  const [showDetails, setShowDetails] = useState(Boolean);
+import Main from "./components/Main";
+const App = () => {
   const [showError, setShowError] = useState(Boolean);
   const [searchData, setSearchData] = useState(Array);
-  const [detailedForecast, setDetailedForecast] = useState(Array);
+  // const [coordsValue, setCoordsValue] = useState({
+  //   latitude: String,
+  //   longitude: String,
+  // });
+  const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
   const {
     initialForecast,
-    coordsValue,
-    setCoordsValue,
     setShowInitial,
     showInitial,
+    isLoading,
+    setIsLoading,
+    detailedForecast,
+    setDetailedForecast,
+    // getDetailedForecast,
   } = useInitialForecast();
   const [query, setQuery] = useState(String);
 
-  const getCityForecast = async (query) => {
-    const cityApi = `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${apiKey}`;
-    setShowInitial(false);
-    const call = await fetch(cityApi);
-
-    if (!call.ok) {
-      const message = `An error has occured: ${call.status}`;
-      setShowError(true);
-      throw new Error(message);
-    }
-    const result = await call.json();
-    setShowError(false);
-    setSearchData([result]);
-
-    setShowDetails(false);
-    setShowInitial(false);
-    setCoordsValue({
-      latitude: result.coord.lat,
-      longitude: result.coord.lon,
-    });
-    return [result];
-  };
-
-  const getDetailedForecast = async () => {
-    const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordsValue.latitude}&lon=${coordsValue.longitude}&units=metric&appid=${apiKey}`;
-    const call = await fetch(api);
-    const result = await call.json();
-    setDetailedForecast([result]);
-    setShowDetails(true);
-    return [result];
-  };
+  // const getDetailedForecast = async () => {
+  //   const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordsValue.latitude}&lon=${coordsValue.longitude}&units=metric&appid=${apiKey}`;
+  //   const call = await fetch(api);
+  //   const result = await call.json();
+  //   setDetailedForecast([result]);
+  //   return [result];
+  // };
 
   const handleSearch = (e) => {
     e.preventDefault();
-    getCityForecast(query).catch((error) => {
-      return console.log(error.message);
-    });
+    setIsLoading(true);
+    setShowError(false);
+    setShowInitial(false);
+    getCityForecast(query)
+      // ugly solution here, will refactor
+      .then((data) => {
+        setSearchData([data]);
+
+        fetch(
+          `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=metric&appid=${apiKey}`
+        )
+          .then((data) => data.json())
+          .then((data) => {
+            setDetailedForecast([data]);
+            setShowInitial(false);
+            setIsLoading(false);
+          });
+      })
+      // ugly solution here, will refactor
+
+      .catch((error) => {
+        console.log(error.message);
+        setShowInitial(false);
+        setIsLoading(false);
+        setShowError(true);
+      });
   };
 
   return (
     <div className="App">
-      <div className="app-header">
-        <Header />
-        <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
-      </div>
-      <main>
-        <Results
-          searchData={searchData}
-          showError={showError}
-          detailedForecast={detailedForecast}
-          getDetailedForecast={getDetailedForecast}
-          showDetails={showDetails}
-        />
-
-        {showInitial &&
-          initialForecast.map((data) => {
-            console.log(data);
-
-            return (
-              <CityCard
-                data={data}
-                showDetails={showDetails}
-                detailedForecast={detailedForecast}
-                getDetailedForecast={getDetailedForecast}
-                key={key(data)}
-              />
-            );
-          })}
-      </main>
+      <Header />
+      <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
+      <Main
+        isLoading={isLoading}
+        searchData={searchData}
+        initialForecast={initialForecast}
+        showInitial={showInitial}
+        showError={showError}
+        detailedForecast={detailedForecast}
+      />
       <Footer />
     </div>
   );
-}
+};
 
 export default App;

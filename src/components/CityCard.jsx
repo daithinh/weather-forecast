@@ -1,11 +1,6 @@
 import DetailedCard from "./DetailedCard";
 import key from "weak-key";
-const CityCard = ({
-  data,
-  detailedForecast,
-  getDetailedForecast,
-  showDetails,
-}) => {
+const CityCard = ({ data, detailedForecast }) => {
   const {
     name,
     sys: { country },
@@ -46,17 +41,11 @@ const CityCard = ({
             );
           })}
         </div>
-
-        <button className="get-detailed-forecast" onClick={getDetailedForecast}>
-          7 days forecast
-        </button>
       </article>
 
-      {detailedForecast && showDetails
-        ? detailedForecast.map((details) => {
-            return <DetailedCard details={details} key={key(details)} />;
-          })
-        : ""}
+      {detailedForecast.map((details) => {
+        return <DetailedCard details={details} key={key(details)} />;
+      })}
     </>
   );
 };

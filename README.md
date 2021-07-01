@@ -13,10 +13,11 @@ React JS, HTML/CSS
 
 ## Todo
 
+- Fix minor conditional rendering bug
 - Refactor the code
 - Reorganize folder structure
-- Add "loading" component
-- Styling update ?
+- Add "loading" component / check
+- Styling update ? / in progress
 - More info on weekly forecast ?
 
 Thank you for reading.
