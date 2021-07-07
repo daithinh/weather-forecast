@@ -1,4 +1,5 @@
 import React from "react";
+import key from "weak-key";
 
 const DetailedCard = ({ details }) => {
   return (
@@ -16,7 +17,7 @@ const DetailedCard = ({ details }) => {
             const today = newDay.getDate();
             newDay.setDate(today + dayOfWeek);
             return (
-              <article className="details-cards__card" key={dayOfWeek}>
+              <article className="details-cards__card" key={key(days.temp)}>
                 <header>
                   <p>
                     {newDay.toLocaleString("en-us", { weekday: "long" })}{" "}
@@ -50,12 +51,15 @@ const DetailedCard = ({ details }) => {
 
                 {weather.map(({ description, icon }) => {
                   return (
-                    <div className="details-cards__card--description">
-                      <p>{description}</p>
+                    <div
+                      className="details-cards__card--description"
+                      key={key(weather)}
+                    >
                       <img
                         src={`http://openweathermap.org/img/wn/${icon}.png`}
                         alt="Current weather"
                       />
+                      <p>{description}</p>
                     </div>
                   );
                 })}

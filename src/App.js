@@ -5,7 +5,7 @@ import Footer from "./components/presentational/Footer";
 import Header from "./components/presentational/Header";
 import { useInitialForecast } from "./APIcalls/useInitialForecast";
 import { getCityForecast } from "./APIcalls/getCityForecast";
-
+import MainDataContext from "./contexts/MainDataContext";
 import Main from "./components/Main";
 const App = () => {
   const [showError, setShowError] = useState(Boolean);
@@ -56,14 +56,19 @@ const App = () => {
     <div className="App">
       <Header />
       <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
-      <Main
-        isLoading={isLoading}
-        searchData={searchData}
-        initialForecast={initialForecast}
-        showInitial={showInitial}
-        showError={showError}
-        detailedForecast={detailedForecast}
-      />
+      <MainDataContext.Provider
+        value={{
+          isLoading,
+          searchData,
+          initialForecast,
+          showInitial,
+          showError,
+          detailedForecast,
+        }}
+      >
+        <Main />
+      </MainDataContext.Provider>
+
       <Footer />
     </div>
   );

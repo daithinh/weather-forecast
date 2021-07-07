@@ -2,15 +2,18 @@ import Results from "./Results";
 import Loading from "./presentational/Loading";
 import CityCard from "./CityCard";
 import key from "weak-key";
-const Main = ({
-  isLoading,
-  searchData,
-  showError,
-  detailedForecast,
-  showDetails,
-  showInitial,
-  initialForecast,
-}) => {
+import { useContext } from "react";
+import MainDataContext from "../contexts/MainDataContext";
+const Main = () => {
+  const {
+    isLoading,
+    searchData,
+    showError,
+    detailedForecast,
+    showDetails,
+    showInitial,
+    initialForecast,
+  } = useContext(MainDataContext);
   return (
     <main>
       {!isLoading && (

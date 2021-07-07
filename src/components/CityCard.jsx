@@ -10,7 +10,10 @@ const CityCard = ({ data, detailedForecast }) => {
 
   return (
     <>
-      <article className={temp >= 18 ? `city-card` : `city-card cold`}>
+      <article
+        key={key(data)}
+        className={temp >= 18 ? `city-card` : `city-card cold`}
+      >
         <header className="city-card__header">
           <p>
             {name} ({country})
@@ -31,13 +34,13 @@ const CityCard = ({ data, detailedForecast }) => {
         <div className="city-card__description">
           {weather.map(({ icon, description }) => {
             return (
-              <>
+              <div key={key(weather)}>
                 <img
                   src={`http://openweathermap.org/img/wn/${icon}.png`}
                   alt="current weather"
                 />
                 <p>{description}</p>
-              </>
+              </div>
             );
           })}
         </div>

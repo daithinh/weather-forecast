@@ -98,7 +98,9 @@ img {
   height: 8em;
   background: transparent;
   border: 0.25em solid $lightTangerine;
-  border-right: 0.25em solid $darkTangerine;
+  border-top: 0.25em solid transparent;
+  border-bottom: 0.25em solid transparent;
+  // border-right: 0.25em solid $darkTangerine;
   border-radius: 50%;
   animation: loading 1.5s linear infinite;
 }
@@ -177,6 +179,14 @@ img {
         text-transform: uppercase;
       }
     }
+
+    div {
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: flex-start;
+      place-items: center;
+      gap: 1em;
+    }
   }
 
   .get-detailed-forecast {
@@ -223,10 +233,11 @@ img {
   padding: 0.5em;
   color: $secondaryTxtColor;
   background: #ddd;
+  background: #f0f5f9;
   border-radius: 10px;
-  box-shadow: 3px 3px 20px -2.5px #000000;
+  box-shadow: 3px 3px 2.5px -2.5px #f0f5f9;
   animation: fade-in 0.5s ease-in-out forwards;
-  transition: opacity 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
   @media (max-width: 790px) {
     width: 100%;
     margin: 0 auto;
@@ -261,6 +272,12 @@ img {
   }
 
   .details-cards__card--description {
+    padding: 0.5em 0;
+    display: flex;
+    flex-flow: row wrap;
+    place-items: center;
+    justify-content: flex-start;
+    gap: 1em;
     @include content-font-query();
     p {
       &::first-letter {

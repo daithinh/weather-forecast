@@ -14,8 +14,8 @@ React JS, HTML/CSS
 ## Todo
 
 - Fix minor conditional rendering bug
-- Refactor the code
-- Reorganize folder structure
+- Refactor the code / in progress
+- Reorganize folder structure / in progress
 - Add "loading" component / check
 - Styling update ? / in progress
 - More info on weekly forecast ?
