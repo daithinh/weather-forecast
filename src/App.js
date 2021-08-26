@@ -2,7 +2,7 @@ import "./styles/css/style.css";
 import { useState } from "react";
 import Input from "./components/Input";
 import Footer from "./components/presentational/Footer";
-import Header from "./components/presentational/Header";
+// import Header from "./components/presentational/Header";
 import { useInitialForecast } from "./APIcalls/useInitialForecast";
 import { getCityForecast } from "./APIcalls/getCityForecast";
 import MainDataContext from "./contexts/MainDataContext";
@@ -54,7 +54,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <Header />
+      {/* <Header /> */}
       <Input handleSearch={handleSearch} query={query} setQuery={setQuery} />
       <MainDataContext.Provider
         value={{

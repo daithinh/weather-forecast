@@ -9,15 +9,10 @@ The website uses [OpenWeather Map API](https://openweathermap.org/api) for the d
 
 ## Tech used
 
-React JS, HTML/CSS
+React JS, HTML/CSS, Font Awesome free icons.
 
 ## Todo
 
-- Fix minor conditional rendering bug
-- Refactor the code / in progress
-- Reorganize folder structure / in progress
-- Add "loading" component / check
-- Styling update ? / in progress
 - More info on weekly forecast ?
 
 Thank you for reading.

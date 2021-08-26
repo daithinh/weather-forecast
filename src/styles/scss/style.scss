@@ -1,29 +1,36 @@
 @import "variables";
 @import "mixins";
 @import "keyframes";
-@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html {
-  height: 100%;
   line-height: 1.6;
   scroll-behavior: smooth;
-  font-family: "Roboto", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: "Poppins", sans-serif;
+  scrollbar-color: $lightTangerine $black;
+  scrollbar-width: thin;
 }
 
 body {
-  min-height: 100vh;
-  position: relative;
-  background: #141414;
+  background: radial-gradient(
+    circle,
+    rgba(230, 174, 53, 1) 50%,
+    rgba(187, 81, 4, 1) 100%
+  );
 }
 
 main {
-  width: calc(100vw / 1.2);
+  width: clamp(60vw, 90vw, 50em);
   display: flex;
   flex-flow: row wrap;
   place-items: flex-start;
@@ -33,34 +40,31 @@ main {
 }
 
 form {
-  height: 70px;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   place-items: center;
-  gap: 1em;
+  width: clamp(60vw, 90vw, 50em);
+  padding: 1em 0 0 0;
 
   input {
     background: transparent;
     padding: 0.5em 0.25em;
     outline: none;
     border: none;
-    box-shadow: 0px 2px 2px -2px $mainTxtColor;
-    font-size: $defaultFontSize;
-    color: $mainTxtColor;
+    box-shadow: 0em 0.18em 0.12em -0.12em #000;
+    font-size: $defaultFontSizeQuery;
+    color: $white;
     font-family: inherit;
     transition: box-shadow 0.25s ease-in-out;
-
+    flex: 1;
     &:focus {
-      box-shadow: 0px 3px 1px -1px $darkTangerine;
+      box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
+        -0.12em -0.12em 0.18em -0.06em #000;
     }
 
     &::placeholder {
       opacity: 1;
-      color: $mainTxtColor;
-    }
-
-    @media (max-width: 790px) {
-      font-size: $defaultMobileFontSize;
+      color: $white;
     }
   }
 
@@ -68,8 +72,8 @@ form {
     border: none;
     outline: none;
     background: none;
-    color: $mainTxtColor;
-    font-size: $defaultFontSize;
+    color: $black;
+    font-size: inherit;
     padding: 0.5em;
     display: inline-block;
     cursor: pointer;
@@ -89,196 +93,141 @@ img {
   max-height: 100%;
   object-fit: cover;
   display: block;
-  background: lighten($darkGrey, 60%);
-  border-radius: 50%;
 }
 
 .loading {
   width: 8em;
   height: 8em;
   background: transparent;
-  border: 0.25em solid $lightTangerine;
-  border-top: 0.25em solid transparent;
-  border-bottom: 0.25em solid transparent;
-  // border-right: 0.25em solid $darkTangerine;
+  border: 0.15em solid $black;
+  border-top: 0.15em solid transparent;
+  border-bottom: 0.15em solid transparent;
   border-radius: 50%;
   animation: loading 1.5s linear infinite;
 }
 
-.app-header {
-  place-self: start center;
-  display: flex;
-  flex-direction: column;
-  place-items: center;
-  gap: 2em;
-  place-content: center;
-  text-transform: uppercase;
-  padding: 0.5em;
-  h2 {
-    color: $mainTxtColor;
-    color: $mainTxtColor;
-    @include header-font-query();
-    font-family: "Montserrat", sans-serif;
-  }
-}
-
 .city-card {
-  color: $mainTxtColor;
+  color: $white;
   padding: 0.5em;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border-radius: 10px;
-  box-shadow: 2.5px 2.5px 15px 2.5px #000;
-
-  background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+  display: grid;
+  gap: 1.5em;
+  grid-template-columns: repeat(1, 1fr);
+  border-radius: 0.5em;
+  background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.5)),
     url("../../images/warm.png") no-repeat center center/cover;
-  min-width: 20vw;
-
-  place-self: start;
+  width: 100%;
   animation: fade-in 1s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
-  @media (max-width: 1300px) {
-    flex-grow: 1;
-  }
+  box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
+    -0.12em -0.12em 0.18em -0.06em #000;
+  .city-card__header {
+    .city-card__header--country {
+      font-size: 60%;
+      font-weight: 200;
+    }
 
-  span {
-    font-weight: 600;
-    text-shadow: 2px 2px 5px #000;
-  }
-
-  header {
-    font-family: "Roboto", sans-serif;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-    @include header-font-query();
-    text-shadow: 2px 2px 5px #000;
-    max-width: 10ch;
-  }
-
-  .city-card__main {
-    font-size: $largeHeaderFontSize;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    text-shadow: 2px 2px 5px #000;
+    h2 {
+      margin: 0 auto;
+      text-align: center;
+      font-size: $desktopLargeHeaderQuery;
+      max-width: 30ch;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.025em;
+      text-shadow: 0.05em 0.05em 0.1em #000;
+      word-wrap: break-word;
+    }
   }
 
   .city-card__additional {
-    @include content-font-query();
-    padding: 0.5em 0;
-    text-shadow: 2px 2px 5px #000;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    place-items: center;
+    .city-card__additional--wind,
+    .city-card__additional--humidity {
+      text-align: center;
+      font-size: $defaultFontSizeQuery;
+      padding: 1em;
+      text-shadow: 0.05em 0.05em 0.1em #000;
+      :nth-child(3) {
+        font-weight: 200;
+        font-size: 80%;
+      }
+    }
   }
 
   .city-card__description {
-    padding: 0.5em 0;
-    p {
-      @include content-font-query();
-      text-shadow: 2px 2px 5px #000;
-      &::first-letter {
-        text-transform: uppercase;
+    display: flex;
+    place-self: center;
+    place-items: center;
+    justify-content: center;
+    gap: 1em;
+    border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+    .city-card__description__temps {
+      :nth-child(1) {
+        font-size: $desktopHeaderSizeQuery;
+        font-weight: 600;
+
+        span {
+          font-size: 80%;
+          font-weight: 200;
+        }
       }
-    }
-
-    div {
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: flex-start;
-      place-items: center;
-      gap: 1em;
-    }
-  }
-
-  .get-detailed-forecast {
-    place-self: start;
-    padding: 0.5em 0.75em;
-    font-family: inherit;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-    border: none;
-    outline: none;
-    background: transparent;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: inherit;
-    color: $mainTxtColor;
-    transition: all 0.25s ease-in-out;
-    background: #010101;
-    &:hover {
-      background: #141414;
-      color: $mainTxtColor;
+      :nth-child(2) {
+        font-size: $defaultFontSizeQuery;
+        font-weight: 200;
+      }
+      p {
+        text-shadow: 0.05em 0.05em 0.1em #000;
+      }
     }
   }
 }
 
 .cold {
-  background: linear-gradient(rgba(20, 20, 20, 0.7), rgba(20, 20, 20, 0.7)),
+  background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.5)),
     url("../../images/cold.png") no-repeat center center/cover;
 }
 
 .details-cards-cont {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1em;
-  flex-grow: 1;
-  min-width: 70%;
-  place-self: center;
-
-  @media (max-width: 790px) {
-    grid-template-columns: repeat(1, 1fr);
-  }
+  width: 100%;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.5em 0.5em;
+  box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
+    -0.12em -0.12em 0.18em -0.06em #000;
+  padding: 0.5em;
 }
 
 .details-cards__card {
-  padding: 0.5em;
-  color: $secondaryTxtColor;
-  background: #ddd;
-  background: #f0f5f9;
-  border-radius: 10px;
-  box-shadow: 3px 3px 2.5px -2.5px #f0f5f9;
+  color: $black;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  place-items: center;
   animation: fade-in 0.5s ease-in-out forwards;
   transition: all 0.25s ease-in-out;
-  @media (max-width: 790px) {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  span {
-    color: darken($darkTangerine, 10%);
-  }
-
-  header {
-    font-size: $defaultFontSize;
-
-    &::after {
-      @include article-border-bottom-custom();
-    }
-
-    span {
-      color: darken($darkTangerine, 10%);
-      font-size: $defaultMobileFontSize;
-    }
+  border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+  @include font-weight();
+  .details-cards__card--day {
+    font-size: $defaultFontSizeQuery;
   }
 
   .details-cards__card--temps {
-    @include content-font-query();
-  }
+    font-size: $defaultFontSizeQuery;
 
-  .details-cards__card--wind {
-    @include content-font-query();
-    &::after {
-      @include article-border-bottom-custom();
+    span {
+      font-size: 80%;
     }
   }
 
   .details-cards__card--description {
-    padding: 0.5em 0;
     display: flex;
     flex-flow: row wrap;
     place-items: center;
-    justify-content: flex-start;
-    gap: 1em;
-    @include content-font-query();
+
+    font-size: $defaultFontSizeQuery;
     p {
       &::first-letter {
         text-transform: uppercase;
@@ -290,27 +239,24 @@ img {
 .error {
   text-transform: uppercase;
   letter-spacing: 0.025em;
-  color: $mainTxtColor;
-  font-family: "Montserrat", sans-serif;
+  color: $white;
   font-weight: 400;
   text-align: center;
 }
 
 footer {
-  background: #141414;
+  background: $black;
   width: 100%;
   place-self: end center;
-  header {
-    display: flex;
-    place-items: center;
-    justify-content: center;
-    a {
-      font-weight: 400;
-      color: #ddd;
-      text-align: center;
-      text-decoration: none;
-      font-size: $defaultFontSize;
-      padding: 0.5em;
-    }
+  text-align: center;
+  padding: 1em;
+
+  a {
+    font-weight: 400;
+    color: $white;
+    text-decoration: none;
+    font-size: $defaultFontSizeQuery;
+
+    @include font-weight();
   }
 }

@@ -24,7 +24,6 @@ const Main = () => {
           showDetails={showDetails}
         />
       )}
-
       {showInitial ? (
         initialForecast.map((data) => {
           return (

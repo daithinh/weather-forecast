@@ -5,7 +5,6 @@ const Result = ({
   showError,
   detailedForecast,
   getDetailedForecast,
-  showDetails,
 }) => {
   return (
     <>
@@ -16,7 +15,6 @@ const Result = ({
               data={data}
               detailedForecast={detailedForecast}
               getDetailedForecast={getDetailedForecast}
-              showDetails={showDetails}
               key={index}
             />
           );

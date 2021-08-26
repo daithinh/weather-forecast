@@ -1,11 +1,19 @@
 import DetailedCard from "./DetailedCard";
 import key from "weak-key";
+import {
+  faMapMarkerAlt,
+  faTint,
+  faWind,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 const CityCard = ({ data, detailedForecast }) => {
   const {
     name,
     sys: { country },
-    main: { temp, feels_like, temp_min, temp_max },
+    main: { temp, temp_min, humidity },
     weather,
+    wind: { speed },
   } = data;
 
   return (
@@ -15,34 +23,43 @@ const CityCard = ({ data, detailedForecast }) => {
         className={temp >= 18 ? `city-card` : `city-card cold`}
       >
         <header className="city-card__header">
-          <p>
-            {name} ({country})
-          </p>
+          <h2>
+            <span>
+              <FontAwesomeIcon icon={faMapMarkerAlt} />
+            </span>{" "}
+            {name}{" "}
+            <span className="city-card__header--country">({country})</span>
+          </h2>
         </header>
-        <div className="city-card__main">
-          <p>{temp} &#8451;</p>
-        </div>
-        <div className="city-card__additional">
-          <p>
-            <span>Real feel:</span> {feels_like} &#8451;
-          </p>
-          <p>
-            <span>Min:</span> {temp_min} &#8451; / <span>Max:</span> {temp_max}{" "}
-            &#8451;
-          </p>
-        </div>
-        <div className="city-card__description">
-          {weather.map(({ icon, description }) => {
-            return (
-              <div key={key(weather)}>
-                <img
-                  src={`http://openweathermap.org/img/wn/${icon}.png`}
-                  alt="current weather"
-                />
+
+        {weather.map(({ icon, description }) => {
+          return (
+            <div className="city-card__description" key={key(weather)}>
+              <img
+                src={`http://openweathermap.org/img/wn/${icon}.png`}
+                alt="current weather"
+              />
+              <div className="city-card__description__temps">
+                <p>
+                  {temp} &#176;<span> / {temp_min}</span>
+                </p>
                 <p>{description}</p>
               </div>
-            );
-          })}
+            </div>
+          );
+        })}
+
+        <div className="city-card__additional">
+          <div className="city-card__additional--wind">
+            <FontAwesomeIcon icon={faWind} />
+            <p>{speed}km/h</p>
+            <p>Wind</p>
+          </div>
+          <div className="city-card__additional--humidity">
+            <FontAwesomeIcon icon={faTint} />
+            <p>{humidity}%</p>
+            <p>Humidity</p>
+          </div>
         </div>
       </article>
 

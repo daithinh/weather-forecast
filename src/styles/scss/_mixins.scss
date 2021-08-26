@@ -1,33 +1,7 @@
-@import "variables";
+@mixin font-weight {
+  font-weight: 400;
 
-@mixin header-font-query {
-  font-size: $largeHeaderFontSize;
-
-  @media (max-width: 790px) {
-    font-size: $defaultFontSize;
+  @media (max-width: 768px) {
+    font-weight: 200;
   }
-}
-
-@mixin main-temp-font-query {
-  font-size: $headerFontSize;
-
-  @media (max-width: 790px) {
-    font-size: $defaultFontSize;
-  }
-}
-
-@mixin content-font-query {
-  font-size: $defaultFontSize;
-
-  @media (max-width: 790px) {
-    font-size: $defaultMobileFontSize;
-  }
-}
-
-@mixin article-border-bottom-custom {
-  content: "";
-  display: block;
-  max-width: 100%;
-  height: 1px;
-  background: rgba(0, 0, 0, 0.25);
 }
