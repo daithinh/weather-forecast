@@ -29,11 +29,11 @@ const DetailedCard = ({ details }) => {
                       className="details-cards__card--description"
                       key={key(weather)}
                     >
+                      <p>{description}</p>
                       <img
                         src={`http://openweathermap.org/img/wn/${icon}.png`}
                         alt="Current weather"
                       />
-                      <p>{description}</p>
                     </div>
                   );
                 })}

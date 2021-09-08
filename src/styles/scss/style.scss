@@ -14,36 +14,37 @@
 html {
   line-height: 1.6;
   scroll-behavior: smooth;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-family: "Poppins", sans-serif;
-  scrollbar-color: $lightTangerine $black;
+  font-family: "Poppins", sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+    sans-serif;
+  scrollbar-color: $green $black;
   scrollbar-width: thin;
 }
 
 body {
-  background: radial-gradient(
-    circle,
-    rgba(230, 174, 53, 1) 50%,
-    rgba(187, 81, 4, 1) 100%
-  );
+  background: $black;
 }
 
 main {
-  width: clamp(60vw, 90vw, 50em);
+  width: 99vw;
+  max-width: 50em;
   display: flex;
   flex-flow: row wrap;
   place-items: flex-start;
   justify-content: space-evenly;
-  gap: 2em;
+  padding: 2em 0 0 0;
   min-height: 25em;
+  background: $black;
+  background: $orange;
+  border-radius: 2em;
 }
 
 form {
   display: flex;
   justify-content: center;
   place-items: center;
-  width: clamp(60vw, 90vw, 50em);
+  width: 90vw;
+  max-width: 50em;
   padding: 1em 0 0 0;
 
   input {
@@ -51,15 +52,15 @@ form {
     padding: 0.5em 0.25em;
     outline: none;
     border: none;
-    box-shadow: 0em 0.18em 0.12em -0.12em #000;
+    box-shadow: 0em 0.18em 0.12em -0.12em $white;
     font-size: $defaultFontSizeQuery;
     color: $white;
     font-family: inherit;
     transition: box-shadow 0.25s ease-in-out;
     flex: 1;
     &:focus {
-      box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
-        -0.12em -0.12em 0.18em -0.06em #000;
+      box-shadow: 0.18em 0.18em 0.18em -0.06em $white,
+        -0.12em -0.12em 0.18em -0.06em $white;
     }
 
     &::placeholder {
@@ -72,7 +73,7 @@ form {
     border: none;
     outline: none;
     background: none;
-    color: $black;
+    color: $white;
     font-size: inherit;
     padding: 0.5em;
     display: inline-block;
@@ -99,11 +100,24 @@ img {
   width: 8em;
   height: 8em;
   background: transparent;
-  border: 0.15em solid $black;
+  border: 0.15em solid $white;
   border-top: 0.15em solid transparent;
   border-bottom: 0.15em solid transparent;
   border-radius: 50%;
   animation: loading 1.5s linear infinite;
+}
+
+.app-header {
+  font-size: $desktopHeaderSizeQuery;
+  text-transform: uppercase;
+  color: $white;
+}
+
+article {
+  width: 100%;
+  display: grid;
+  gap: 2em;
+  place-items: center;
 }
 
 .city-card {
@@ -112,61 +126,41 @@ img {
   display: grid;
   gap: 1.5em;
   grid-template-columns: repeat(1, 1fr);
-  border-radius: 0.5em;
-  background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.5)),
-    url("../../images/warm.png") no-repeat center center/cover;
-  width: 100%;
+  border-radius: 2em;
+  width: 95%;
+  margin: 0 auto;
   animation: fade-in 1s ease-in-out forwards;
   transition: opacity 0.25s ease-in-out;
-  box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
-    -0.12em -0.12em 0.18em -0.06em #000;
-  .city-card__header {
-    .city-card__header--country {
-      font-size: 60%;
-      font-weight: 200;
-    }
-
-    h2 {
-      margin: 0 auto;
-      text-align: center;
-      font-size: $desktopLargeHeaderQuery;
-      max-width: 30ch;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.025em;
-      text-shadow: 0.05em 0.05em 0.1em #000;
-      word-wrap: break-word;
-    }
+  box-shadow: 0 0 0.5em $black;
+  text-shadow: 0.05em 0.05em 0.1em $black;
+  .city-card__header--country {
+    font-size: 60%;
+    font-weight: 200;
   }
 
-  .city-card__additional {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-    place-items: center;
-    .city-card__additional--wind,
-    .city-card__additional--humidity {
-      text-align: center;
-      font-size: $defaultFontSizeQuery;
-      padding: 1em;
-      text-shadow: 0.05em 0.05em 0.1em #000;
-      :nth-child(3) {
-        font-weight: 200;
-        font-size: 80%;
-      }
-    }
+  h2 {
+    margin: 0 auto;
+    text-align: center;
+    font-size: $desktopLargeHeaderQuery;
+    max-width: 30ch;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    text-shadow: 0.05em 0.05em 0.1em $black;
+    word-wrap: break-word;
   }
 
   .city-card__description {
     display: flex;
     place-self: center;
-    place-items: center;
+    place-items: flex-start;
     justify-content: center;
     gap: 1em;
-    border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+    text-align: right;
+
     .city-card__description__temps {
       :nth-child(1) {
-        font-size: $desktopHeaderSizeQuery;
+        font-size: $desktopLargeHeaderQuery;
         font-weight: 600;
 
         span {
@@ -175,18 +169,53 @@ img {
         }
       }
       :nth-child(2) {
-        font-size: $defaultFontSizeQuery;
+        font-size: $desktopHeaderSizeQuery;
         font-weight: 200;
-      }
-      p {
-        text-shadow: 0.05em 0.05em 0.1em #000;
+        font-style: italic;
       }
     }
   }
 }
 
+.city-card__additional {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  place-items: center;
+  background: $white;
+  border-radius: 2em;
+  width: 95%;
+  margin: 0 auto;
+
+  .city-card__additional--wind,
+  .city-card__additional--humidity,
+  .city-card__additional--visibility {
+    text-align: center;
+    font-size: $defaultFontSizeQuery;
+    padding: 1em;
+    svg {
+      color: $orange;
+    }
+    :nth-child(3) {
+      @include font-weight();
+      font-size: 80%;
+      color: lighten($black, 20%);
+    }
+  }
+}
+
+.city-card__additional-wrapper-paint {
+  width: 100%;
+  background: linear-gradient(180deg, $orange 50%, $whiteCoffe 50%);
+}
+
+.warm {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("../../images/warm.png") no-repeat center center/cover;
+}
+
 .cold {
-  background: linear-gradient(rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.5)),
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("../../images/cold.png") no-repeat center center/cover;
 }
 
@@ -195,28 +224,32 @@ img {
   width: 100%;
   grid-template-columns: repeat(1, 1fr);
   gap: 0.5em 0.5em;
-  box-shadow: 0.18em 0.18em 0.18em -0.06em #000,
-    -0.12em -0.12em 0.18em -0.06em #000;
   padding: 0.5em;
+  background: $whiteCoffe;
+  padding: 2em 0.5em;
+  border-radius: 0 0 2em 2em;
 }
 
 .details-cards__card {
   color: $black;
   display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  place-items: center;
+  flex-flow: row wrap;
   animation: fade-in 0.5s ease-in-out forwards;
   transition: all 0.25s ease-in-out;
-  border-bottom: 0.05em solid rgba(0, 0, 0, 0.1);
+  border-bottom: 0.05em solid rgba(0, 0, 0, 0.25);
+  gap: 0 !important;
+
   @include font-weight();
   .details-cards__card--day {
     font-size: $defaultFontSizeQuery;
+    flex: 0;
   }
 
   .details-cards__card--temps {
     font-size: $defaultFontSizeQuery;
 
+    flex: 0 0 8em;
+    text-align: right;
     span {
       font-size: 80%;
     }
@@ -226,7 +259,9 @@ img {
     display: flex;
     flex-flow: row wrap;
     place-items: center;
-
+    justify-content: flex-end;
+    text-align: right;
+    flex: 2;
     font-size: $defaultFontSizeQuery;
     p {
       &::first-letter {
