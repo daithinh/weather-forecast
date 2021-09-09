@@ -19,7 +19,6 @@ const DetailedCard = ({ details }) => {
                     {newDay
                       .toLocaleString("en-us", { weekday: "long" })
                       .slice(0, 3)}{" "}
-                    {/* <span>({newDay.toLocaleDateString()})</span> */}
                   </p>
                 </div>
 

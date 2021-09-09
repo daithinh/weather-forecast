@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export const useInitialForecast = () => {
+export const useInitialForecast = (apiKey) => {
   const [initialForecast, setInitialForecast] = useState(Array);
   const [showInitial, setShowInitial] = useState(Boolean);
   const [coordsValue, setCoordsValue] = useState({
@@ -9,10 +9,9 @@ export const useInitialForecast = () => {
   });
   const [isLoading, setIsLoading] = useState(Boolean);
   const [detailedForecast, setDetailedForecast] = useState(Array);
-  const apiKey = `2b1dfd97968067e68d497a960d2585ca`;
 
-  const getDetailedForecast = async () => {
-    const apiDetail = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordsValue.latitude}&lon=${coordsValue.longitude}&units=metric&appid=${apiKey}`;
+  const getDetailedForecast = async (latitude, longitude) => {
+    const apiDetail = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
     const callDetail = await fetch(apiDetail);
     const resultDetail = await callDetail.json();
     setDetailedForecast([resultDetail]);
@@ -31,7 +30,7 @@ export const useInitialForecast = () => {
           longitude: result.coord.lon,
         });
 
-        let detailsCall = async () => {
+        const detailsCall = async () => {
           const details = [result].map(
             async (coords) =>
               await (
@@ -62,7 +61,6 @@ export const useInitialForecast = () => {
     showInitial,
     isLoading,
     setIsLoading,
-    setDetailedForecast,
     detailedForecast,
     getDetailedForecast,
   };

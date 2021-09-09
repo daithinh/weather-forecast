@@ -5,39 +5,19 @@ import key from "weak-key";
 import { useContext } from "react";
 import MainDataContext from "../contexts/MainDataContext";
 const Main = () => {
-  const {
-    isLoading,
-    searchData,
-    showError,
-    detailedForecast,
-    showDetails,
-    showInitial,
-    initialForecast,
-  } = useContext(MainDataContext);
+  const { isLoading, showInitial, initialForecast } =
+    useContext(MainDataContext);
   return (
     <main>
-      {!isLoading && (
-        <Results
-          searchData={searchData}
-          showError={showError}
-          detailedForecast={detailedForecast}
-          showDetails={showDetails}
-        />
-      )}
-      {showInitial ? (
+      {showInitial && !isLoading ? (
         initialForecast.map((data) => {
-          return (
-            <CityCard
-              data={data}
-              showDetails={showDetails}
-              detailedForecast={detailedForecast}
-              key={key(data)}
-            />
-          );
+          return <CityCard data={data} key={key(data)} />;
         })
       ) : isLoading ? (
         <Loading />
-      ) : null}
+      ) : (
+        <Results />
+      )}
     </main>
   );
 };

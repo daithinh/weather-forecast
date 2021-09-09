@@ -18,8 +18,8 @@ const App = () => {
     isLoading,
     setIsLoading,
     detailedForecast,
-    setDetailedForecast,
-  } = useInitialForecast();
+    getDetailedForecast,
+  } = useInitialForecast(apiKey);
   const [query, setQuery] = useState(String);
 
   const handleSearch = (e) => {
@@ -28,21 +28,13 @@ const App = () => {
     setShowError(false);
     setShowInitial(false);
     getCityForecast(query)
-      // ugly solution here, will refactor
       .then((data) => {
         setSearchData([data]);
-
-        fetch(
-          `https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=metric&appid=${apiKey}`
-        )
-          .then((data) => data.json())
-          .then((data) => {
-            setDetailedForecast([data]);
-            setShowInitial(false);
-            setIsLoading(false);
-          });
+        getDetailedForecast(data.coord.lat, data.coord.lon).then(() => {
+          setShowInitial(false);
+          setIsLoading(false);
+        });
       })
-      // ugly solution here, will refactor
 
       .catch((error) => {
         console.log(error.message);

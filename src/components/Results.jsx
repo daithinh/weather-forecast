@@ -1,23 +1,14 @@
+import { useContext } from "react/cjs/react.development";
+import MainDataContext from "../contexts/MainDataContext";
 import CityCard from "./CityCard";
 
-const Result = ({
-  searchData,
-  showError,
-  detailedForecast,
-  getDetailedForecast,
-}) => {
+const Result = () => {
+  const { searchData, showError } = useContext(MainDataContext);
   return (
     <>
       {!showError ? (
         searchData.map((data, index) => {
-          return (
-            <CityCard
-              data={data}
-              detailedForecast={detailedForecast}
-              getDetailedForecast={getDetailedForecast}
-              key={index}
-            />
-          );
+          return <CityCard data={data} key={index} />;
         })
       ) : (
         <h2 className="error">No city found, try another query!</h2>
