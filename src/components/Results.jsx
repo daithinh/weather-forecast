@@ -2,11 +2,12 @@ import { useContext } from "react/cjs/react.development";
 import MainDataContext from "../contexts/MainDataContext";
 import CityCard from "./CityCard";
 
-const Result = () => {
+const Results = () => {
   const { searchData, showError } = useContext(MainDataContext);
+
   return (
     <>
-      {!showError ? (
+      {!showError && searchData ? (
         searchData.map((data, index) => {
           return <CityCard data={data} key={index} />;
         })
@@ -17,4 +18,4 @@ const Result = () => {
   );
 };
 
-export default Result;
+export default Results;
