@@ -1,4 +1,4 @@
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import MainDataContext from "../contexts/MainDataContext";
 import CityCard from "./CityCard";
 

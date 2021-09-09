@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { useContext } from "react/cjs/react.development";
+import { useContext } from "react";
 import MainDataContext from "../contexts/MainDataContext";
 
 const CityCard = ({ data }) => {
