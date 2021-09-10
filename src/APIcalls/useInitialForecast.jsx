@@ -11,7 +11,7 @@ export const useInitialForecast = (apiKey) => {
   const [detailedForecast, setDetailedForecast] = useState(Array);
 
   const getDetailedForecast = async (latitude, longitude) => {
-    const apiDetail = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&appid=${apiKey}`;
+    const apiDetail = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=metric&lang=vi&appid=${apiKey}`;
     const callDetail = await fetch(apiDetail);
     const resultDetail = await callDetail.json();
     setDetailedForecast([resultDetail]);
@@ -22,7 +22,7 @@ export const useInitialForecast = (apiKey) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (position) => {
         setIsLoading(true);
-        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&appid=${apiKey}`;
+        const api = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric&lang=vi&appid=${apiKey}`;
         const call = await fetch(api);
         const result = await call.json();
         setCoordsValue({
@@ -35,7 +35,7 @@ export const useInitialForecast = (apiKey) => {
             async (coords) =>
               await (
                 await fetch(
-                  `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.coord.lat}&lon=${coords.coord.lon}&units=metric&appid=${apiKey}`
+                  `https://api.openweathermap.org/data/2.5/onecall?lat=${coords.coord.lat}&lon=${coords.coord.lon}&units=metric&lang=vi&appid=${apiKey}`
                 )
               ).json()
           );
