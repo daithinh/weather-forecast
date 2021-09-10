@@ -55,18 +55,18 @@ const CityCard = ({ data }) => {
             <div className="city-card__additional--wind">
               <FontAwesomeIcon icon={faWind} />
               <p>{speed}km/h</p>
-              <p>Wind</p>
+              <p>Gió</p>
             </div>
             <div className="city-card__additional--humidity">
               <FontAwesomeIcon icon={faTint} />
               <p>{humidity}%</p>
-              <p>Humidity</p>
+              <p>Độ ẩm</p>
             </div>
 
             <div className="city-card__additional--visibility">
               <FontAwesomeIcon icon={faEye} />
               <p>{visibility}m</p>
-              <p>Visibility</p>
+              <p>Tầm nhìn</p>
             </div>
           </div>
         </div>
